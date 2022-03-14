@@ -1,0 +1,14 @@
+library(arules)
+library(arulesViz)
+
+#Looking for survival outcome in RHS
+Da <- read.csv("C:\\Spring_2022\\Frontier in Big Data Comp Design Paper\\CSV_Input_Survival_New_6b.csv",header=T,colClasses="factor")
+
+new_rules100 <- apriori(Da, appearance = list(rhs=c("Survived=yes"),default="lhs"))
+summary(new_rules100)
+inspect(new_rules100)
+new_rules200 <- new_rules100[!is.redundant(new_rules100)]
+summary(new_rules200)
+inspect(new_rules200)
+
+plot(new_rules200, method='graph')
